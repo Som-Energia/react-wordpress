@@ -1,0 +1,13 @@
+<?php
+/**
+ * @wordpress-plugin
+ * Plugin Name:       Som Energia React In Wordpress
+ */
+
+defined( 'ABSPATH' ) or die( 'Direct script access disallowed.' );
+
+define( 'SOMRW_WIDGET_PATH', plugin_dir_path( __FILE__ ) . '/widget' );
+define( 'SOMRW_ASSET_MANIFEST', SOMRW_WIDGET_PATH . '/build/asset-manifest.json' );
+define( 'SOMRW_INCLUDES', plugin_dir_path( __FILE__ ) . '/includes' );
+
+require_once( SOMRW_INCLUDES . '/enqueue.php' );
