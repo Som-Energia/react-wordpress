@@ -15,7 +15,7 @@ add_action( 'init', function() {
     $asset_manifest = json_decode( file_get_contents( SOMRW_ASSET_MANIFEST ), true )['files'];
 
     if ( isset( $asset_manifest[ 'main.css' ] ) ) {
-      wp_enqueue_style( 'erw', get_site_url() . $asset_manifest[ 'main.css' ] );
+      wp_enqueue_style( 'somrw', get_site_url() . $asset_manifest[ 'main.css' ] );
     }
 
     wp_enqueue_script( 'somrw-runtime', get_site_url() . $asset_manifest[ 'runtime~main.js' ], array(), null, true );
