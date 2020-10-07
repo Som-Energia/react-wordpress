@@ -18,9 +18,9 @@ add_action( 'init', function() {
       wp_enqueue_style( 'somrw', get_site_url() . $asset_manifest[ 'main.css' ] );
     }
 
-    wp_enqueue_script( 'somrw-runtime', get_site_url() . $asset_manifest[ 'runtime~main.js' ], array(), null, true );
+    wp_enqueue_script( 'somrw-runtime', get_site_url() . $asset_manifest[ 'runtime-main.js' ], array(), null, true );
 
-    wp_enqueue_script( 'somrw-main', get_site_url() . $asset_manifest[ 'main.js' ], array('erw-runtime'), null, true );
+    wp_enqueue_script( 'somrw-main', get_site_url() . $asset_manifest[ 'main.js' ], array('somrw-runtime'), null, true );
 
     foreach ( $asset_manifest as $key => $value ) {
       if ( preg_match( '@static/js/(.*)\.chunk\.js@', $key, $matches ) ) {
