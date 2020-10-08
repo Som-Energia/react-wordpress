@@ -12,7 +12,7 @@ add_action( 'init', function() {
 
   add_action( 'wp_enqueue_scripts', function() {
 
-    $asset_manifest = json_decode( file_get_contents( SOMRW_ASSET_MANIFEST ), true )['files'];
+    $asset_manifest = json_decode( file_get_contents( SOMRW_ASSET_MANIFEST ), true )['entrypoints'];
 
     if ( isset( $asset_manifest[ 'main.css' ] ) ) {
       wp_enqueue_style( 'somrw', get_site_url() . SOMRW_STATIC . $asset_manifest[ 'main.css' ] );
