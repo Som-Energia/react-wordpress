@@ -13,3 +13,4 @@ define( 'SOMRW_INCLUDES', plugin_dir_path( __FILE__ ) . '/includes' );
 define( 'SOMRW_STATIC', '/wp-content/plugins/react-wordpress/widget/build');
 
 require_once( SOMRW_INCLUDES . '/enqueue.php' );
+require_once( SOMRW_INCLUDES . '/shortcode.php' );
