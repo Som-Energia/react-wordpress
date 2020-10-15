@@ -27,7 +27,7 @@ add_action( 'init', function() {
 
     foreach ( $asset_manifest as $key => $value ) {
 
-      if ( in_array( $value, $entrypoints ) ) {
+      if ( in_array( $key, $entrypoints ) ) {
         if ( preg_match( '@static/js/(.*)\.chunk\.js@', $key, $matches ) ) {
           if ( $matches && is_array( $matches ) && count( $matches ) === 2 ) {
             $name = "somrw-" . preg_replace( '/[^A-Za-z0-9_]/', '-', $matches[1] );
