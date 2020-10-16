@@ -38,7 +38,7 @@ add_action( 'init', function() {
         if ( preg_match( '@static/css/(.*)\.chunk\.css@', $key, $matches ) ) {
           if ( $matches && is_array( $matches ) && count( $matches ) == 2 ) {
             $name = "somrw-" . preg_replace( '/[^A-Za-z0-9_]/', '-', $matches[1] );
-            wp_enqueue_style( $name, get_site_url() . SOMRW_STATIC . $value, array( 'somrw' ), null );
+            wp_enqueue_style( $name, get_site_url() . $value, array( 'somrw' ), null );
           }
         }
       }
