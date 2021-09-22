@@ -6,7 +6,10 @@ defined( 'ABSPATH' ) or die( 'Direct script access disallowed.' );
 add_shortcode( 'som_rw_webforms', function( $atts ) {
   $default_atts = array();
   $args = shortcode_atts( $default_atts, $atts );
-
+  $attr_string = "";
+  foreach ($atts as $key => $value){
+    $attr_string.=" data-{$key}=\"{$value}\"";
+  }
   $output = "
     <script type=\"text/javascript\">
       // webforms config
@@ -15,7 +18,7 @@ add_shortcode( 'som_rw_webforms', function( $atts ) {
       }
     </script>
 
-    <div id=\"root\"></div>
+    <div id=\"root\" {$attr_string}></div>
   ";
 
   return $output;
