@@ -23,6 +23,8 @@ add_action( 'init', function() {
       wp_enqueue_script( 'somrw-runtime', get_site_url() . $asset_manifest[ 'runtime-main.js' ], array(), null, true );
 
       wp_enqueue_script( 'somrw-main', get_site_url() . $asset_manifest[ 'main.js' ], array('somrw-runtime'), null, true );
+    }else if( isset( $asset_manifest[ 'main.js'] ) ) {
+        wp_enqueue_script( 'somrw-main', get_site_url() . $asset_manifest[ 'main.js' ], array(), null, true );
     }
 
     foreach ( $asset_manifest as $key => $value ) {
