@@ -14,7 +14,8 @@ add_shortcode( 'som_rw_webforms', function( $atts ) {
     <script type=\"text/javascript\">
       // webforms config
       window.config = {
-        API_BASE_URL: 'https://testapi.somenergia.coop:4433/',
+        API_BASE_URL: 'https://testapi.somenergia.coop/',
+	GA_TRAKING_ID: ''
       }
     </script>
 
