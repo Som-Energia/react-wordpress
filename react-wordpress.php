@@ -8,9 +8,9 @@ defined( 'ABSPATH' ) or die( 'Direct script access disallowed.' );
 define( 'INCLUDES_PATH', plugin_dir_path( __FILE__ ) . '/includes' );
 
 $current_url = isset($_SERVER['REQUEST_URI']) ? esc_url($_SERVER['REQUEST_URI']) : '';
-$indexed_prices_build = 'indexed-daily-prices';
+$indexed_prices_build = array('preu-avui', 'indexed-daily-prices', 'precio-hoy');
 
-if (strpos($current_url, $indexed_prices_build)) {
+if ( strpos_array( $current_url, $indexed_prices_build ) !== false ) {
   define( 'SOMRWINDEXED_PRICES_WIDGET_PATH', plugin_dir_path( __FILE__ ) . '/webforms-indexed-prices' );
   define( 'SOMRWINDEXED_PRICES_ASSET_MANIFEST', SOMRWINDEXED_PRICES_WIDGET_PATH . '/build/asset-manifest.json' );
   require_once( INCLUDES_PATH . '/enqueue_indexed_prices.php');
@@ -20,4 +20,17 @@ if (strpos($current_url, $indexed_prices_build)) {
   define( 'SOMRW_ASSET_MANIFEST', SOMRW_WIDGET_PATH . '/build/asset-manifest.json' );
   require_once( INCLUDES_PATH . '/enqueue.php' );
   require_once( INCLUDES_PATH . '/shortcode.php' );
+}
+
+// Function to check if any string in array is found in the haystack string
+function strpos_array( $haystack, $needles ) {
+    if ( ! is_array( $needles ) ) {
+        $needles = array( $needles );
+    }
+    foreach ( $needles as $needle ) {
+        if ( strpos( $haystack, $needle ) !== false ) {
+            return true;
+        }
+    }
+    return false;
 }
