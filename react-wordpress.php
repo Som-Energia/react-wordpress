@@ -8,7 +8,7 @@ defined( 'ABSPATH' ) or die( 'Direct script access disallowed.' );
 define( 'INCLUDES_PATH', plugin_dir_path( __FILE__ ) . '/includes' );
 
 $current_url = isset($_SERVER['REQUEST_URI']) ? esc_url($_SERVER['REQUEST_URI']) : '';
-$indexed_prices_build = array('preu-avui', 'indexed-daily-prices', 'precio-hoy');
+$indexed_prices_build = array('preu-avui', 'indexed-daily-prices', 'precio-hoy', 'gaurko-prezioa', 'prezo-hoxe');
 
 if ( strpos_array( $current_url, $indexed_prices_build ) !== false ) {
   define( 'SOMRWINDEXED_PRICES_WIDGET_PATH', plugin_dir_path( __FILE__ ) . '/webforms-indexed-prices' );
