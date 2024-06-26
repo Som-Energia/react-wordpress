@@ -23,7 +23,7 @@ if ( strpos_array( $current_url, $webforms_test_build) !== false ) {
   define( 'SOMRW_TEST_WIDGET_PATH', plugin_dir_path( __FILE__ ) . '/webforms-test' );
   define( 'SOMRW_TEST_ASSET_MANIFEST', SOMRW_TEST_WIDGET_PATH . '/build/asset-manifest.json' );
   require_once( INCLUDES_PATH . '/enqueue-test.php' );
-  require_once( INCLUDES_PATH . '/shortcode.php' );
+  require_once( INCLUDES_PATH . '/shortcode-test.php' );
 } else {
   define( 'SOMRW_WIDGET_PATH', plugin_dir_path( __FILE__ ) . '/webforms' );
   define( 'SOMRW_ASSET_MANIFEST', SOMRW_WIDGET_PATH . '/build/asset-manifest.json' );
