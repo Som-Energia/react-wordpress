@@ -17,9 +17,7 @@ if ( strpos_array( $current_url, $indexed_prices_build ) !== false ) {
   define( 'SOMRWINDEXED_PRICES_ASSET_MANIFEST', SOMRWINDEXED_PRICES_WIDGET_PATH . '/build/asset-manifest.json' );
   require_once( INCLUDES_PATH . '/enqueue_indexed_prices.php');
   require_once( INCLUDES_PATH . '/shortcode_indexed_prices.php');
-}
-
-if ( strpos_array( $current_url, $webforms_test_build) !== false ) {
+} elseif ( strpos_array( $current_url, $webforms_test_build) !== false ) {
   define( 'SOMRW_TEST_WIDGET_PATH', plugin_dir_path( __FILE__ ) . '/webforms-test' );
   define( 'SOMRW_TEST_ASSET_MANIFEST', SOMRW_TEST_WIDGET_PATH . '/build/asset-manifest.json' );
   require_once( INCLUDES_PATH . '/enqueue-test.php' );
