@@ -6,45 +6,23 @@ defined( 'ABSPATH' ) or die( 'Direct script access disallowed.' );
 add_action( 'init', function() {
 
   add_filter( 'script_loader_tag', function( $tag, $handle ) {
-    if ( ! preg_match( '/^somrw-/', $handle ) ) { return $tag; }
+    if ( ! preg_match( '/^somrw/', $handle ) ) { return $tag; }
+    $tag = str_replace( '<script', '<script type="module"', $tag );
     return str_replace( ' src', ' async defer src', $tag );
   }, 10, 2 );
 
   add_action( 'wp_enqueue_scripts', function() {
+    $asset_manifest = json_decode( file_get_contents( SOMRW_ASSET_MANIFEST), true )['index.html'];
+    $server_build_absolute_path = get_site_url() . "/wp-content/plugins/react-wordpress/webforms/build/";
 
-    $asset_manifest = json_decode( file_get_contents( SOMRW_ASSET_MANIFEST ), true )['files'];
-    $entrypoints = json_decode( file_get_contents( SOMRW_ASSET_MANIFEST ), true )['entrypoints'];
+    # Loads the js file
+    wp_enqueue_script( 'somrw', $server_build_absolute_path . $asset_manifest[ 'file' ], array(), null, true);
 
-    if ( isset( $asset_manifest[ 'main.css' ] ) ) {
-      wp_enqueue_style( 'somrw', get_site_url() . $asset_manifest[ 'main.css' ] );
-    }
-
-    if ( isset( $asset_manifest[ 'runtime-main.js' ] ) ) {
-      wp_enqueue_script( 'somrw-runtime', get_site_url() . $asset_manifest[ 'runtime-main.js' ], array(), null, true );
-
-      wp_enqueue_script( 'somrw-main', get_site_url() . $asset_manifest[ 'main.js' ], array('somrw-runtime'), null, true );
-    }else if( isset( $asset_manifest[ 'main.js'] ) ) {
-        wp_enqueue_script( 'somrw-main', get_site_url() . $asset_manifest[ 'main.js' ], array(), null, true );
-    }
-
-    foreach ( $asset_manifest as $key => $value ) {
-
-      if ( in_array( $key, $entrypoints ) ) {
-        if ( preg_match( '@static/js/(.*)\.chunk\.js@', $key, $matches ) ) {
-          if ( $matches && is_array( $matches ) && count( $matches ) === 2 ) {
-            $name = "somrw-" . preg_replace( '/[^A-Za-z0-9_]/', '-', $matches[1] );
-            wp_enqueue_script( $name, get_site_url() . $value, array( 'somrw-main' ), null, true );
-          }
-        }
-
-        if ( preg_match( '@static/css/(.*)\.chunk\.css@', $key, $matches ) ) {
-          if ( $matches && is_array( $matches ) && count( $matches ) == 2 ) {
-            $name = "somrw-" . preg_replace( '/[^A-Za-z0-9_]/', '-', $matches[1] );
-            wp_enqueue_style( $name, get_site_url() . $value, array( 'somrw' ), null );
-          }
-        }
+    # Loads all css files
+    if (isset($asset_manifest['css']) && is_array($asset_manifest['css'])) {
+      foreach ($asset_manifest['css'] as $handle => $path) {
+          wp_enqueue_style( 'somrw', $server_build_absolute_path . $path, array(), null, true);
       }
     }
-
   });
 });
