@@ -21,7 +21,7 @@ add_action( 'init', function() {
     # Loads all css files
     if (isset($asset_manifest['css']) && is_array($asset_manifest['css'])) {
       foreach ($asset_manifest['css'] as $handle => $path) {
-          wp_enqueue_style( 'somrw', $server_build_absolute_path . $path, array(), null, true);
+          wp_enqueue_style( 'somrw', $server_build_absolute_path . $path);
       }
     }
   });
